@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/todays_events'
+TodaysEvents::Cli.new.call
+
