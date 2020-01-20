@@ -2,31 +2,40 @@ class TodaysEvents::Cli
   def call
     welcome
     options
-    closing
   end
   
-  def welcome    
+  def welcome  
     @events = TodaysEvents::Events.scrape
     puts "Here are some upcoming events happening in Houston:"
     @events.each.with_index(1) do |event, x|
       puts "#{x}. #{event[:title]}"
     end
+    puts ""
+    puts ""
   end
 
   def options
     @input = nil
     while @input != "exit"
+      puts ""
+      puts ""
       puts "Please enter the number of the event you would like more info on"
       puts "Or enter list to see the list again or exit to exit"
       @input = gets.strip.downcase
       
      
-      if @input.to_i > 0
+      if @input.to_i.between?(1, @events.count)
         all_info
-      elsif @input == "list"
+      elsif @input.downcase == "list"
         welcome
+      elsif @input.downcase == "exit"
+        closing
       else
+        puts ""
+        puts ""
         puts "Sorry, that's an invalid input"
+        puts ""
+        puts ""
       end
     end
   end
@@ -43,6 +52,10 @@ class TodaysEvents::Cli
   end
 
   def closing
+    puts ""
+    puts ""
     puts "See you next time!"
+    puts ""
+    puts ""
   end
 end
