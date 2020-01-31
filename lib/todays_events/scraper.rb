@@ -3,13 +3,12 @@ require 'nokogiri'
 require 'open-uri'
 
 class Scraper
+
   def self.scrape
     events = []
+
     doc = Nokogiri::HTML(open('https://www.downtownhouston.org/calendar/'))
-    # date = div.date->returns a list of all dates & times on page
-    # title = h2-> returns a list of all titles
-    # location = h3-> returns list of all
-    # description = a href
+
     doc.css("div.item").each do |card|
       card.css("div.text").each do |event|
         location = event.css('h3').text
@@ -18,6 +17,9 @@ class Scraper
         events << {title: title, location: location, date: date[1]}
       end
     end
-    events
+
+    #events.each do |event|
+    #  Events.new(event)
+    end
   end
 end

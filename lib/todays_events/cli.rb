@@ -6,15 +6,16 @@ class Cli
   end
 
   def generate_events
-    events_array = Scraper.scrape
-    Events.create_from_scrape(events_array)
+   Scraper.scrape
   end
   
   def welcome  
     puts "Here are some upcoming events happening in Houston:"
     puts ""
     puts ""
-    Events.list_event_titles
+    Events.all.each.with_index(1) do |event, index|
+      "#{index}. #{event.title}"
+    end
   end
 
   def options
