@@ -1,17 +1,15 @@
-class TodaysEvents::Cli 
+class Cli 
   def call
+    Scraper.scrape
     welcome
     options
   end
   
   def welcome  
-    @events = TodaysEvents::Events.scrape
     puts "Here are some upcoming events happening in Houston:"
-    @events.each.with_index(1) do |event, x|
-      puts "#{x}. #{event[:title]}"
-    end
     puts ""
     puts ""
+    Events.list_event_titles
   end
 
   def options
@@ -21,10 +19,10 @@ class TodaysEvents::Cli
       puts ""
       puts "Please enter the number of the event you would like more info on"
       puts "Or enter list to see the list again or exit to exit"
+
       @input = gets.strip.downcase
       
-     
-      if @input.to_i.between?(1, @events.count)
+      if @input.to_i.between?(1, Events.all.count)
         all_info
       elsif @input.downcase == "list"
         welcome
@@ -44,7 +42,7 @@ class TodaysEvents::Cli
     puts ""
     puts ""
     puts "Here is more info on that event:"
-    event = @events[@input.to_i - 1]
+    event = Events.all[@input.to_i - 1]
     puts "#{event[:title]}"
     puts "This event is located at #{event[:location]} on #{event[:date]}"
     puts ""
