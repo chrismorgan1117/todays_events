@@ -13,7 +13,8 @@ class Scraper
       card.css("div.text").each do |event|
         location = event.css('h3').text
         title = event.css('h2.fav').text
-        date = event.css('div.date').text.split("\n").uniq
+        date = event.css('div.date').text.split("\n").map {|e| e.strip}.select{|e| e != ""}.select.with_index {|e, i| i != 1}.join(", ").gsub("&dash; ", "")
+        #date = event.date.map {|e| e.strip}.select{|e| e != ""}.select.with_index {|e, i| i != 1}.join(", ").gsub("&dash; ", "")
         #events << {title: title, location: location, date: date[1]}
         Events.new(title, location, date)
       end

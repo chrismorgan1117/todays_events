@@ -1,8 +1,6 @@
 # TodaysEvents
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/todays_events`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Scrapes an events website for events happening in Houston 
 
 ## Installation
 
@@ -21,8 +19,11 @@ Or install it yourself as:
     $ gem install todays_events
 
 ## Usage
-
-TODO: Write usage instructions here
+Prompt with ./bin/todays_events
+A list of events will be output to terminal
+Select the number of the event you would like more info on
+Type 'list' to see the list again
+Type 'exit' to exit
 
 ## Development
 
