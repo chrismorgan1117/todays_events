@@ -1,8 +1,13 @@
 class Cli 
   def call
-    Scraper.scrape
+    generate_events
     welcome
     options
+  end
+
+  def generate_events
+    events_array = Scraper.scrape
+    Events.create_from_scrape(events_array)
   end
   
   def welcome  
@@ -43,8 +48,8 @@ class Cli
     puts ""
     puts "Here is more info on that event:"
     event = Events.all[@input.to_i - 1]
-    puts "#{event[:title]}"
-    puts "This event is located at #{event[:location]} on #{event[:date]}"
+    puts "#{event.title}"
+    puts "This event is located at #{event.location} on #{event.date}"
     puts ""
     puts ""
   end
