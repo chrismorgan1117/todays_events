@@ -1,3 +1,4 @@
+
 class Cli 
   def call
     generate_events
@@ -7,6 +8,7 @@ class Cli
 
   def generate_events
    Scraper.scrape
+   #binding.pry
   end
   
   def welcome  
@@ -14,7 +16,7 @@ class Cli
     puts ""
     puts ""
     Events.all.each.with_index(1) do |event, index|
-      "#{index}. #{event.title}"
+      puts "#{index}. #{event.title}"
     end
   end
 
